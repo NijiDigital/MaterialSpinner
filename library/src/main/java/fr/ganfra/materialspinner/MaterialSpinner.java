@@ -8,7 +8,6 @@ import android.graphics.Path;
 import android.graphics.Point;
 import android.graphics.Typeface;
 import android.os.Build;
-import android.support.annotation.LayoutRes;
 import android.support.v7.widget.AppCompatSpinner;
 import android.text.Layout;
 import android.text.StaticLayout;
@@ -89,7 +88,7 @@ public class MaterialSpinner extends AppCompatSpinner implements ValueAnimator.A
     private CharSequence error;
     private CharSequence hint;
     private int hintColor;
-    @LayoutRes private int hintLayout;
+    private int hintLayout;
     private CharSequence floatingLabelText;
     private int floatingLabelColor;
     private boolean multiline;
