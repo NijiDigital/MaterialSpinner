@@ -580,7 +580,7 @@ public class MaterialSpinner extends AppCompatSpinner implements ValueAnimator.A
         invalidate();
     }
 
-    public void setHintLayout(@LayoutRes int hintLayout) {
+    public void setHintLayout(int hintLayout) {
         this.hintLayout = hintLayout;
         invalidate();
     }
