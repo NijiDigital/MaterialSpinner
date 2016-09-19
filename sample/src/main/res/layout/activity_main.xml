@@ -1,7 +1,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,7 +20,7 @@
             app:ms_floatingLabelColor="#00FF00"
             app:ms_floatingLabelText="floating label"
             app:ms_hint="hint"
-            app:ms_multiline="true" />
+            app:ms_multiline="true"/>
 
         <fr.ganfra.materialspinner.MaterialSpinner
             android:id="@+id/spinner2"
@@ -29,14 +29,14 @@
             app:ms_enableErrorLabel="false"
             app:ms_enableFloatingLabel="false"
             app:ms_hint="hint"
-            app:ms_hintColor="#0000FF" />
+            app:ms_hintColor="#0000FF"/>
 
         <fr.ganfra.materialspinner.MaterialSpinner
             android:id="@+id/spinner3"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             app:ms_enableErrorLabel="false"
-            app:ms_enableFloatingLabel="false" />
+            app:ms_enableFloatingLabel="false"/>
 
         <fr.ganfra.materialspinner.MaterialSpinner
             android:id="@+id/spinner4"
@@ -44,18 +44,24 @@
             android:layout_height="wrap_content"
             app:ms_alignLabels="false"
             app:ms_baseColor="@color/spinner_base_color"
-            app:ms_multiline="false" />
+            app:ms_multiline="false"/>
 
         <fr.ganfra.materialspinner.MaterialSpinner
             android:id="@+id/spinner5"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"/>
+
+        <fr.ganfra.materialspinner.MaterialSpinner
+            android:id="@+id/spinner6"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            app:ms_hintLayout="@layout/item_spinner_hint"/>
 
         <Button
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:hint="Show/hide error"
-            android:onClick="activateError" />
+            android:onClick="activateError"/>
 
     </LinearLayout>
 </ScrollView>

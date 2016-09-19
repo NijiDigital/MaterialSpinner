@@ -20,6 +20,7 @@ public class MainActivity extends ActionBarActivity {
     MaterialSpinner spinner3;
     MaterialSpinner spinner4;
     MaterialSpinner spinner5;
+    MaterialSpinner spinner6;
 
     private boolean shown = false;
 
@@ -39,6 +40,7 @@ public class MainActivity extends ActionBarActivity {
         initSpinnerNoHintNoFloatingLabel();
         initSpinnerMultiline();
         initSpinnerScrolling();
+        initSpinnerCustomHintLayout();
 
     }
 
@@ -70,6 +72,12 @@ public class MainActivity extends ActionBarActivity {
     }
 
 
+    private void initSpinnerCustomHintLayout() {
+        spinner6 = (MaterialSpinner) findViewById(R.id.spinner6);
+        spinner6.setAdapter(adapter);
+        spinner6.setHint("Select an item, custom layout");
+    }
+
     public void activateError(View view) {
         if (!shown) {
             spinner4.setError(ERROR_MSG);
@@ -79,8 +87,6 @@ public class MainActivity extends ActionBarActivity {
             spinner5.setError(null);
         }
         shown = !shown;
-
     }
-
 
 }

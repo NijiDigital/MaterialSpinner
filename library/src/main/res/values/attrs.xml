@@ -20,6 +20,6 @@
         <attr name="ms_enableFloatingLabel" format="boolean"/>
         <attr name="ms_enableErrorLabel" format="boolean"/>
         <attr name="ms_isRtl" format="boolean"/>
-
+        <attr name="ms_hintLayout" format="reference"/>
     </declare-styleable>
 </resources>

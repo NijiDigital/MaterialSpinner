@@ -8,6 +8,7 @@ import android.graphics.Path;
 import android.graphics.Point;
 import android.graphics.Typeface;
 import android.os.Build;
+import android.support.annotation.LayoutRes;
 import android.support.v7.widget.AppCompatSpinner;
 import android.text.Layout;
 import android.text.StaticLayout;
@@ -88,6 +89,7 @@ public class MaterialSpinner extends AppCompatSpinner implements ValueAnimator.A
     private CharSequence error;
     private CharSequence hint;
     private int hintColor;
+    @LayoutRes private int hintLayout;
     private CharSequence floatingLabelText;
     private int floatingLabelColor;
     private boolean multiline;
@@ -162,6 +164,7 @@ public class MaterialSpinner extends AppCompatSpinner implements ValueAnimator.A
         error = array.getString(R.styleable.MaterialSpinner_ms_error);
         hint = array.getString(R.styleable.MaterialSpinner_ms_hint);
         hintColor = array.getColor(R.styleable.MaterialSpinner_ms_hintColor, baseColor);
+        hintLayout = array.getResourceId(R.styleable.MaterialSpinner_ms_hintLayout, android.R.layout.simple_spinner_item);
         floatingLabelText = array.getString(R.styleable.MaterialSpinner_ms_floatingLabelText);
         floatingLabelColor = array.getColor(R.styleable.MaterialSpinner_ms_floatingLabelColor, baseColor);
         multiline = array.getBoolean(R.styleable.MaterialSpinner_ms_multiline, true);
@@ -441,10 +444,10 @@ public class MaterialSpinner extends AppCompatSpinner implements ValueAnimator.A
             }
             String textToDraw = floatingLabelText != null ? floatingLabelText.toString() : hint.toString();
             if (isRtl) {
-				canvas.drawText(textToDraw, getWidth() - rightLeftSpinnerPadding - textPaint.measureText(textToDraw), startYFloatingLabel, textPaint);
-			} else {
-				canvas.drawText(textToDraw, startX + rightLeftSpinnerPadding, startYFloatingLabel, textPaint);
-			}
+                canvas.drawText(textToDraw, getWidth() - rightLeftSpinnerPadding - textPaint.measureText(textToDraw), startYFloatingLabel, textPaint);
+            } else {
+                canvas.drawText(textToDraw, startX + rightLeftSpinnerPadding, startYFloatingLabel, textPaint);
+            }
         }
 
         drawSelector(canvas, getWidth() - rightLeftSpinnerPadding, getPaddingTop() + dpToPx(8));
@@ -577,6 +580,11 @@ public class MaterialSpinner extends AppCompatSpinner implements ValueAnimator.A
         invalidate();
     }
 
+    public void setHintLayout(@LayoutRes int hintLayout) {
+        this.hintLayout = hintLayout;
+        invalidate();
+    }
+
     public int getErrorColor() {
         return errorColor;
     }
@@ -647,13 +655,13 @@ public class MaterialSpinner extends AppCompatSpinner implements ValueAnimator.A
     }
 
     public void setRtl() {
-		isRtl = true;
-		invalidate();
-	}
+        isRtl = true;
+        invalidate();
+    }
 
-	public boolean isRtl() {
-		return isRtl;
-	}
+    public boolean isRtl() {
+        return isRtl;
+    }
 
     /**
      * @deprecated {use @link #setPaddingSafe(int, int, int, int)} to keep internal computation OK
@@ -808,8 +816,12 @@ public class MaterialSpinner extends AppCompatSpinner implements ValueAnimator.A
         private View getHintView(final View convertView, final ViewGroup parent, final boolean isDropDownView) {
 
             final LayoutInflater inflater = LayoutInflater.from(mContext);
-            final int resid = isDropDownView ? android.R.layout.simple_spinner_dropdown_item : android.R.layout.simple_spinner_item;
-            final TextView textView = (TextView) inflater.inflate(resid, parent, false);
+            final int resid = isDropDownView ? android.R.layout.simple_spinner_dropdown_item : hintLayout;
+            final View hintView = inflater.inflate(resid, parent, false);
+            if (!(hintView instanceof TextView)) {
+                throw new IllegalArgumentException("Hint layout must have TextView as root");
+            }
+            final TextView textView = (TextView) hintView;
             textView.setText(hint);
             textView.setTextColor(MaterialSpinner.this.isEnabled() ? hintColor : disabledColor);
             textView.setTag(HINT_TYPE);
